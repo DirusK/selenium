@@ -18,6 +18,7 @@ import (
 	"time"
 
 	"github.com/blang/semver"
+
 	"github.com/tebeka/selenium/firefox"
 	"github.com/tebeka/selenium/log"
 )
@@ -56,12 +57,16 @@ type remoteWD struct {
 	browserVersion semver.Version
 }
 
-// HTTPClient is the default client to use to communicate with the WebDriver
-// server.
-var HTTPClient = http.DefaultClient
+const (
+	// jsonContentType is JSON content type.
+	jsonContentType = "application/json"
 
-// jsonContentType is JSON content type.
-const jsonContentType = "application/json"
+	// defaultHTTPTimeout default value for http timeout.
+	defaultHTTPTimeout = time.Minute * 10
+)
+
+// HTTPClient is the default client to use to communicate with the WebDriver server.
+var HTTPClient = &http.Client{Timeout: defaultHTTPTimeout}
 
 func newRequest(method string, url string, data []byte) (*http.Request, error) {
 	request, err := http.NewRequest(method, url, bytes.NewBuffer(data))
