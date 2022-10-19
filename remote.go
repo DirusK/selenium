@@ -62,7 +62,7 @@ const (
 	jsonContentType = "application/json"
 
 	// defaultHTTPTimeout default value for http timeout.
-	defaultHTTPTimeout = time.Minute * 10
+	defaultHTTPTimeout = time.Minute * 5
 )
 
 // HTTPClient is the default client to use to communicate with the WebDriver server.
